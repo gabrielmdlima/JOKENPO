@@ -2,8 +2,8 @@ from random import randint
 import utils
 
 
-continuar = 0
-while continuar == 0:
+loop = 0
+while loop == 0:
   # Título do jogo / Game title.
   utils.titulo()
 
@@ -26,4 +26,4 @@ while continuar == 0:
   utils.result(result)
 
   # Recebe a escolha do usuário de continuar ou não.
-  continuar = utils.continuar()
+  loop = utils.continuar()
