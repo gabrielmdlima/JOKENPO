@@ -124,6 +124,8 @@ def define_results(player, computer):
 
 
 def result(entrada):
+  print()  # Serve como \n para, se eu colocar junto na linha de baixo fica um espaço antes da impressão
+  print('-'*41)
   sleep(0.6)
   if entrada == 1:
     saida = '\033[32m PARABÉNS! VOCÊ GANHOU! \033[m'
@@ -131,5 +133,5 @@ def result(entrada):
     saida = '\033[31m QUE PENA! VOCÊ PERDEU! \033[m'
   else:
     saida = '\033[33m TEMOS UM EMPATE! \033[m'
-  print(f'\n{saida:-^49}')
+  print(f'\n{saida:=^49}')
   print('\n' * 5)
