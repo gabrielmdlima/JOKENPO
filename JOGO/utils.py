@@ -134,4 +134,16 @@ def result(entrada):
   else:
     saida = '\033[33m TEMOS UM EMPATE! \033[m'
   print(f'\n{saida:=^49}')
-  print('\n' * 5)
+
+
+def continuar():
+  print('\n'*10)
+  while True:
+    entrada = str(input('\nDeseja jogar novamente? (S/N) ')).strip().upper()
+    if entrada in 'NÃO':
+      return 1
+    elif entrada in 'SIM':
+      print('\n'*50)
+      return 0
+    else:
+      print('\nOpção inválida! Tente novamente!')

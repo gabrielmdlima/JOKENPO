@@ -1,23 +1,29 @@
 from random import randint
 import utils
 
-# Título do jogo / Game title.
-utils.titulo()
 
-# Gerando um número aleatório de 1 à 3 para definir a escolha do computador.
-# Generating a random number between 1 and 3 to set computer decision.
-computer = randint(1, 3)
-# print(computer)  # log da resposta do computador.
+continuar = 0
+while continuar == 0:
+  # Título do jogo / Game title.
+  utils.titulo()
 
-# Recebendo a escolha do jogador.
-player = utils.escolha_jogador()
-# print(player)  # log da resposta do jogador.
+  # Gerando um número aleatório de 1 à 3 para definir a escolha do computador.
+  # Generating a random number between 1 and 3 to set computer decision.
+  computer = randint(1, 3)
+  # print(computer)  # log da resposta do computador.
 
-# Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
-utils.jokenpo()
+  # Recebendo a escolha do jogador.
+  player = utils.escolha_jogador()
+  # print(player)  # log da resposta do jogador.
 
-# Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
-result = utils.define_results(player, computer)
+  # Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
+  utils.jokenpo()
 
-# Apresenta o resultado no console.
-utils.result(result)
+  # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
+  result = utils.define_results(player, computer)
+
+  # Apresenta o resultado no console.
+  utils.result(result)
+
+  # Recebe a escolha do usuário de continuar ou não.
+  continuar = utils.continuar()
