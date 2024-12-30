@@ -55,8 +55,9 @@ def escolha_jogador():
 
 def jokenpo():
   print('Joken...', end='')
-  sleep(1.25)
-  print('pô')
+  sleep(1)
+  print('pô\n')
+  print('-'*41)
 
 
 #  Nessa função, o lado que aparece a mão do jogador é o esquerdo, deve ser usado com o hands.opcoes_esq()
@@ -123,10 +124,12 @@ def define_results(player, computer):
 
 
 def result(entrada):
-  sleep(0.75)
+  sleep(0.6)
   if entrada == 1:
-    print('\033[32mPARABÉNS! VOCÊ GANHOU!\033[m')
+    saida = '\033[32m PARABÉNS! VOCÊ GANHOU! \033[m'
   elif entrada == 2:
-    print('\033[31mQUE PENA! VOCÊ PERDEU!\033[m')
+    saida = '\033[31m QUE PENA! VOCÊ PERDEU! \033[m'
   else:
-    print('\033[33mTEMOS UM EMPATE!\033[m')
+    saida = '\033[33m TEMOS UM EMPATE! \033[m'
+  print(f'\n{saida:-^49}')
+  print('\n' * 5)
