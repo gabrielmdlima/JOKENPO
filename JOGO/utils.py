@@ -1,5 +1,6 @@
 from time import sleep
 import ascii
+from os import system
 
 
 def title():
@@ -34,6 +35,7 @@ def escolha_jogador():
   while True:
     # Dá as opções do jogador
     # Give player's options
+    print('\n'*2)
     ascii.opcoes_dir()
     choice = str(input('Sua escolha: ')).strip().upper()  # Recebe a escolha do jogar / Receives player's choice.
 
@@ -128,12 +130,10 @@ def result(entrada):
   print('-'*41)
   sleep(0.6)
   if entrada == 1:
-    saida = '\033[32m PARABÉNS! VOCÊ GANHOU! \033[m'
-  elif entrada == 2:
-    saida = '\033[31m QUE PENA! VOCÊ PERDEU! \033[m'
-  else:
-    saida = '\033[33m TEMOS UM EMPATE! \033[m'
-  print(f'\n{saida:=^49}')
+    return '\033[32m PARABÉNS! VOCÊ GANHOU! \033[m'
+  if entrada == 2:
+    return '\033[31m QUE PENA! VOCÊ PERDEU! \033[m'
+  return '\033[33m TEMOS UM EMPATE! \033[m'
 
 
 def continuar():
@@ -141,17 +141,16 @@ def continuar():
   while True:
     entrada = str(input('\nJogar novamente? (S/N) ')).strip().upper()
     if entrada in 'NÃO':
-      print('\n')
-      return 1
+      return False
     elif entrada in 'SIM':
-      print('\n'*3)
-      return 0
+      system('cls')
+      return True
     else:
       print('\n\033[31mOpção inválida! Tente novamente!\033[m')
 
 
 def placar(player, computer, partidas):
-  print(f'O resultado final de {partidas} partidas foi:\n')
+  print(f'\nO resultado final de {partidas} partidas foi:\n')
   if player > computer:
     print(f'Você {player} X {computer} Computador')
   elif computer > player:
