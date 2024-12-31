@@ -60,8 +60,8 @@ def jokenpo():
   print('-'*41)
 
 
-#  Nessa função, o lado que aparece a mão do jogador é o esquerdo, deve ser usado com o hands.opcoes_esq()
-def definir_resultado(player, computer):
+#  Nessa função, o lado que aparece a mão do jogador é o esquerdo, deve ser usado com o ascii.opcoes_esq()
+'''def definir_resultado(player, computer):
   # Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
   if player == 1 and computer == 1:  # EMPATE PEDRA
@@ -89,7 +89,7 @@ def definir_resultado(player, computer):
     ascii.tesoura_pedra()
     saida = 2
 
-  return saida
+  return saida'''
 
 
 def define_results(player, computer):
@@ -153,8 +153,8 @@ def continuar():
 def placar(player, computer, partidas):
   print(f'O resultado final de {partidas} partidas foi:\n')
   if player > computer:
-    print(f'Jogador {player} X {computer} Computador')
+    print(f'Você {player} X {computer} Computador')
   elif computer > player:
-    print(f'Computador {computer} X {player} Jogador')
+    print(f'Computador {computer} X {player} Você')
   else:
     print(f'EMPATE! {player} X {computer}')

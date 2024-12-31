@@ -38,4 +38,5 @@ while loop == 0:
   # Recebe a escolha do usuário de continuar ou não.
   loop = utils.continuar()
 
+
 utils.placar(score_player, score_computer, num_partidas)
