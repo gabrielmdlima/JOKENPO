@@ -1,2 +1,2 @@
-# JOKENPO
- Project of a Rock Paper Scissor with Python
+# JOKENPÔ / ROCK, PAPER, SCISSORS GAME
+ A python rock, paper, scissors project displayed in the IDE console
