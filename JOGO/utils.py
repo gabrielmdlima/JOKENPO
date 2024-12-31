@@ -1,5 +1,5 @@
 from time import sleep
-import hands
+import ascii
 
 
 def title():
@@ -34,7 +34,7 @@ def escolha_jogador():
   while True:
     # Dá as opções do jogador
     # Give player's options
-    hands.opcoes_dir()
+    ascii.opcoes_dir()
     choice = str(input('Sua escolha: ')).strip().upper()  # Recebe a escolha do jogar / Receives player's choice.
 
     # Transforma a escolha do jogador em um número inteiro para ser comparada com a escolha da máquina.
@@ -65,28 +65,28 @@ def definir_resultado(player, computer):
   # Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
   if player == 1 and computer == 1:  # EMPATE PEDRA
-    hands.pedra_pedra()
+    ascii.pedra_pedra()
   elif player == 2 and computer == 2:  # EMPATE PAPEL
-    hands.papel_papel()
+    ascii.papel_papel()
   elif player == 3 and computer == 3:  # EMPATE TESOURA
-    hands.tesoura_tesoura()
+    ascii.tesoura_tesoura()
   elif player == 1 and computer == 3:  # PLAYER GANHA COM PEDRA
-    hands.pedra_tesoura()
+    ascii.pedra_tesoura()
     saida = 1
   elif player == 2 and computer == 1:  # PLAYER GANHA COM PAPEL
-    hands.papel_pedra()
+    ascii.papel_pedra()
     saida = 1
   elif player == 3 and computer == 2:  # PLAYER GANHA COM TESOURA
-    hands.tesoura_papel()
+    ascii.tesoura_papel()
     saida = 1
   elif player == 1 and computer == 2:  # COMPUTADOR GANHA COM PEDRA
-    hands.pedra_papel()
+    ascii.pedra_papel()
     saida = 2
   elif player == 2 and computer == 3:  # COMPUTADOR GANHA COM PAPEL
-    hands.papel_tesoura()
+    ascii.papel_tesoura()
     saida = 2
   elif player == 3 and computer == 1:  # COMPUTADOR GANHA COM TESOURA
-    hands.tesoura_pedra()
+    ascii.tesoura_pedra()
     saida = 2
 
   return saida
@@ -96,28 +96,28 @@ def define_results(player, computer):
   #  Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
   if player == 1 and computer == 1:  # EMPATE PEDRA
-    hands.pedra_pedra()
+    ascii.pedra_pedra()
   elif player == 2 and computer == 2:  # EMPATE PAPEL
-    hands.papel_papel()
+    ascii.papel_papel()
   elif player == 3 and computer == 3:  # EMPATE TESOURA
-    hands.tesoura_tesoura()
+    ascii.tesoura_tesoura()
   elif player == 1 and computer == 3:  # JOGADOR GANHA COM PEDRA
-    hands.tesoura_pedra()
+    ascii.tesoura_pedra()
     saida = 1
   elif player == 2 and computer == 1:  # JOGADOR GANHA COM PAPEL
-    hands.pedra_papel()
+    ascii.pedra_papel()
     saida = 1
   elif player == 3 and computer == 2:  # JOGADOR GANHA COM TESOURA
-    hands.papel_tesoura()
+    ascii.papel_tesoura()
     saida = 1
   elif computer == 1 and player == 3:  # COMPUTADOR GANHA COM PEDRA
-    hands.pedra_tesoura()
+    ascii.pedra_tesoura()
     saida = 2
   elif computer == 2 and player == 1:  # COMPUTADOR GANHA COM PAPEL
-    hands.papel_pedra()
+    ascii.papel_pedra()
     saida = 2
   elif computer == 3 and player == 2:  # COMPUTADOR GANHA COM TESOURA
-    hands.tesoura_papel()
+    ascii.tesoura_papel()
     saida = 2
 
   return saida  # Devolve o resultado
@@ -137,13 +137,24 @@ def result(entrada):
 
 
 def continuar():
-  print('\n'*10)
+  # print('\n'*10)
   while True:
-    entrada = str(input('\nDeseja jogar novamente? (S/N) ')).strip().upper()
+    entrada = str(input('\nJogar novamente? (S/N) ')).strip().upper()
     if entrada in 'NÃO':
+      print('\n')
       return 1
     elif entrada in 'SIM':
-      print('\n'*50)
+      print('\n'*3)
       return 0
     else:
-      print('\nOpção inválida! Tente novamente!')
+      print('\n\033[31mOpção inválida! Tente novamente!\033[m')
+
+
+def placar(player, computer, partidas):
+  print(f'O resultado final de {partidas} partidas foi:\n')
+  if player > computer:
+    print(f'Jogador {player} X {computer} Computador')
+  elif computer > player:
+    print(f'Computador {computer} X {player} Jogador')
+  else:
+    print(f'EMPATE! {player} X {computer}')
