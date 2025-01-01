@@ -1,6 +1,6 @@
 from time import sleep
 import ascii
-from os import system
+# from os import system
 
 
 def title():
@@ -143,7 +143,6 @@ def continuar():
     if entrada in 'NÃO':
       return False
     elif entrada in 'SIM':
-      system('cls')
       return True
     else:
       print('\n\033[31mOpção inválida! Tente novamente!\033[m')
