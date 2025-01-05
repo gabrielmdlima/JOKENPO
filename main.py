@@ -1,55 +1,55 @@
+from random import randint
 import utils
 
-num_partidas = 0
-score_player = 0
-score_computer = 0
 
-# Gerando um número aleatório de 1 à 3 para definir a escolha do computador.
-# Generating a random number between 1 and 3 to set computer decision.
-def computer_choice():
-  from random import randint
-  choice = randint(1, 3)
-  return choice
+class MainClass:
+  def __init__(self):
+    self.num_partidas = 0
+    self.score_player = 0
+    self.score_computer = 0
 
 
-def count_score(result):
-  global score_player, score_computer
-  if result == 1:
-    score_player += 1
-  elif result == 2:
-    score_computer += 1
+  # Gerando um número aleatório de 1 à 3 para definir a escolha do computador.
+  # Generating a random number between 1 and 3 to set computer decision.
+  def computer_choice(self):
+    choice = randint(1, 3)
+    return choice
 
 
-def run_game():
-  global num_partidas, score_player, score_computer
+  def count_score(self, result):
+    if result == 1:
+      self.score_player += 1
+    elif result == 2:
+      self.score_computer += 1
 
-  while True:
-    utils.clear_screen()
-    utils.titulo()  # Título do jogo / Game title.
-    
-    computer = computer_choice()
-    # print(computer)  # log da resposta do computador.
 
-    player = utils.escolha_jogador()  # Recebendo a escolha do jogador.
-    # print(player)  # log da resposta do jogador.
+  def run(self):
 
-    utils.jokenpo()  # Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
+    while True:
+      utils.clear_screen()
+      utils.titulo()  # Título do jogo / Game title.
+      
+      computer = self.computer_choice()
+      # print(computer)  # log da resposta do computador.
 
-    result = utils.define_results(player, computer)  # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
+      player = utils.escolha_jogador()  # Recebendo a escolha do jogador.
+      # print(player)  # log da resposta do jogador.
 
-    count_score(result)  # Contabiliza o placar.
+      utils.jokenpo()  # Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
 
-    num_partidas += 1  # Contabiliza a quantidade de partidas.
+      result = utils.define_results(player, computer)  # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
 
-    print(utils.result(result))  # Apresenta o resultado no console.
+      self.count_score(result)  # Contabiliza o placar.
 
-    if utils.continuar() == True:  # Recebe a escolha do usuário de continuar ou não.
-      run_game()
-      break
-    else:
-      break
+      self.num_partidas += 1  # Contabiliza a quantidade de partidas.
 
-  utils.placar(score_player, score_computer, num_partidas)  # Imprime o placar ao final do jogo.
+      print(utils.result(result))  # Apresenta o resultado no console.
+
+      if not utils.continuar():  # Recebe a escolha do usuário de continuar ou não.
+        break
+
+    utils.placar(self.score_player, self.score_computer, self.num_partidas)  # Imprime o placar ao final do jogo.
 
 if __name__ == '__main__':
-  run_game()
+  game = MainClass()
+  game.run()
