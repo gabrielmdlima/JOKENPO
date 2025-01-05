@@ -41,5 +41,6 @@ while should_continue:
   should_continue = utils.continuar()
 
 system('cls')
+utils.titulo()
 utils.placar(score_player, score_computer, num_partidas)
 print()
