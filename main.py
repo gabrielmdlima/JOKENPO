@@ -25,39 +25,31 @@ def run_game():
 
   while True:
     utils.clear_screen()
-    # Título do jogo / Game title.
-    utils.titulo()
+    utils.titulo()  # Título do jogo / Game title.
     
     computer = computer_choice()
     # print(computer)  # log da resposta do computador.
 
-    # Recebendo a escolha do jogador.
-    player = utils.escolha_jogador()
+    player = utils.escolha_jogador()  # Recebendo a escolha do jogador.
     # print(player)  # log da resposta do jogador.
 
-    # Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
-    utils.jokenpo()
+    utils.jokenpo()  # Imprimindo a frase "Joken...pô" para dar mais realismo ao jogo.
 
-    # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
-    result = utils.define_results(player, computer)
+    result = utils.define_results(player, computer)  # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
 
-    # Contabiliza o placar
-    count_score(result)
+    count_score(result)  # Contabiliza o placar.
 
-    # Contabiliza a quantidade de partidas
-    num_partidas += 1
+    num_partidas += 1  # Contabiliza a quantidade de partidas.
 
-    # Apresenta o resultado no console.
-    print(utils.result(result))
+    print(utils.result(result))  # Apresenta o resultado no console.
 
-    # Recebe a escolha do usuário de continuar ou não.
-    if utils.continuar() == True:
+    if utils.continuar() == True:  # Recebe a escolha do usuário de continuar ou não.
       run_game()
       break
     else:
       break
 
-  utils.placar(score_player, score_computer, num_partidas)
+  utils.placar(score_player, score_computer, num_partidas)  # Imprime o placar ao final do jogo.
 
 if __name__ == '__main__':
   run_game()
