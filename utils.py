@@ -1,9 +1,9 @@
+from os import system, name
 from time import sleep
 import ascii
 
 
 def clear_screen():
-  from os import system, name
   system('cls' if name == 'nt' else 'clear')
 
 
