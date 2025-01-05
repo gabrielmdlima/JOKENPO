@@ -1,6 +1,10 @@
 from time import sleep
 import ascii
-# from os import system
+
+
+def clear_screen():
+  from os import system, name
+  system('cls' if name == 'nt' else 'clear')
 
 
 def title():
@@ -42,17 +46,13 @@ def escolha_jogador():
     # Transforma a escolha do jogador em um número inteiro para ser comparada com a escolha da máquina.
     # Turns the player's choice in an int number to compare with the computer's choice.
     if choice == 'PEDRA':
-      player = 1
-      break
+      return 1
     elif choice == 'PAPEL':
-      player = 2
-      break
+      return 2
     elif choice == 'TESOURA':
-      player = 3
-      break
+      return 3
     else:
       print(f'\033[31mOpção "{choice}" inválida. Tente novamente!\033[m')
-  return player
 
 
 def jokenpo():
@@ -63,7 +63,7 @@ def jokenpo():
 
 
 #  Nessa função, o lado que aparece a mão do jogador é o esquerdo, deve ser usado com o ascii.opcoes_esq()
-'''def definir_resultado(player, computer):
+def definir_resultado(player, computer):
   # Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
   if player == 1 and computer == 1:  # EMPATE PEDRA
@@ -91,7 +91,7 @@ def jokenpo():
     ascii.tesoura_pedra()
     saida = 2
 
-  return saida'''
+  return saida
 
 
 def define_results(player, computer):
@@ -130,10 +130,10 @@ def result(entrada):
   print('-'*41)
   sleep(0.6)
   if entrada == 1:
-    return '\033[32m PARABÉNS! VOCÊ GANHOU! \033[m'
+    return f'\n{"\033[32m PARABÉNS! VOCÊ GANHOU! \033[m":=^49}'
   if entrada == 2:
-    return '\033[31m QUE PENA! VOCÊ PERDEU! \033[m'
-  return '\033[33m TEMOS UM EMPATE! \033[m'
+    return f'\n{"\033[31m QUE PENA! VOCÊ PERDEU! \033[m":=^49}'
+  return f'\n{"\033[33m TEMOS UM EMPATE! \033[m":=^49}'
 
 
 def continuar():
@@ -149,6 +149,8 @@ def continuar():
 
 
 def placar(player, computer, partidas):
+  clear_screen()
+  titulo()
   print(f'\nO resultado final de {partidas} partidas foi:\n')
   if player > computer:
     print(f'Você {player} X {computer} Computador')
@@ -156,3 +158,4 @@ def placar(player, computer, partidas):
     print(f'Computador {computer} X {player} Você')
   else:
     print(f'EMPATE! {player} X {computer}')
+  print()
