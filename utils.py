@@ -8,6 +8,7 @@ def clear_screen():
 
 
 def title():
+  clear_screen()
   print('-=-'*10)
   print("""  ┬─┐┌─┐┌─┐┬┌─          
   ├┬┘│ ││  ├┴┐          
@@ -22,6 +23,7 @@ def title():
 
 
 def titulo():
+  clear_screen()
   print('-=-'*10)
   print("""  ┌─┐┌─┐┌┬┐┬─┐┌─┐      
   ├─┘├┤  ││├┬┘├─┤      
@@ -37,28 +39,38 @@ def titulo():
 
 def escolha_jogador():
   while True:
+    titulo()  # Título do jogo / Game title.
+
     # Dá as opções do jogador
     # Give player's options
-    print('\n'*2)
     ascii.opcoes_dir()
-    choice = str(input('Sua escolha: ')).strip().upper()  # Recebe a escolha do jogar / Receives player's choice.
-
+    entrance = str(input('Sua escolha: ')).strip()  # Recebe a escolha do jogar / Receives player's choice.
+    choice = entrance.upper()
     # Transforma a escolha do jogador em um número inteiro para ser comparada com a escolha da máquina.
     # Turns the player's choice in an int number to compare with the computer's choice.
     if choice == 'PEDRA':
-      return 1
+      return 1, entrance
     elif choice == 'PAPEL':
-      return 2
+      return 2, entrance
     elif choice == 'TESOURA':
-      return 3
+      return 3, entrance
     else:
-      print(f'\033[31mOpção "{choice}" inválida. Tente novamente!\033[m')
+      print(f'\033[31mOpção "{entrance}" inválida. Tente novamente!\033[m')
+      sleep(2)
 
 
-def jokenpo():
-  print('Joken...', end='')
-  sleep(1)
-  print('pô\n')
+def jokenpo(entrance):
+
+  for i in range(3):
+    titulo()
+    ascii.opcoes_dir()
+    print(f'Sua escolha: {entrance}')
+    print()
+    print('='*41)
+    ascii.jokenpo(i)
+    print('='*41)
+    sleep(0.8)
+  print()
   print('-'*41)
 
 
@@ -135,7 +147,7 @@ def result(entrada):
     return f'\n{"\033[31m QUE PENA! VOCÊ PERDEU! \033[m":=^49}'
   return f'\n{"\033[33m TEMOS UM EMPATE! \033[m":=^49}'
 
-
+#  Pergunta se o jogador quer continuar
 def continuar():
   # print('\n'*10)
   while True:
@@ -147,9 +159,8 @@ def continuar():
     else:
       print('\n\033[31mOpção inválida! Tente novamente!\033[m')
 
-
+#  Mostra o placar no console ao final do jogo
 def placar(player, computer, partidas):
-  clear_screen()
   titulo()
   print(f'\nO resultado final de {partidas} partidas foi:\n')
   if player > computer:
