@@ -9,6 +9,28 @@ class GameData:
     self.score_computer = 0
 
 
+  def get_language(self):
+    while True:
+      print("""
+Idioma / Language
+[1] Português
+[2] Inglês
+""")
+      choice = int(input('Idioma / Language: '))
+      if str(choice) in '12':
+        break
+      else:
+        print('Tente novamente! / Try again!')
+
+    self.language = 'pt' if choice == 1 else 'en'
+
+
+  def set_translations(self):
+    self.translations = utils.set_translation()
+    
+  
+  
+
 # Gerando um número aleatório de 1 à 3 para definir a escolha do computador.
 # Generating a random number between 1 and 3 to set computer decision.
 def computer_choice():
@@ -23,7 +45,11 @@ def count_score(data, result):
     data.score_computer += 1
 
 
+
 def run(data):
+  utils.clear_screen()
+  data.get_language()
+  data.set_translations()
 
   while True:    
     computer = computer_choice()
@@ -45,7 +71,7 @@ def run(data):
     if not utils.continuar():  # Recebe a escolha do usuário de continuar ou não.
       break
 
-  utils.placar(data.score_player, data.score_computer, data.num_partidas)  # Imprime o placar ao final do jogo.
+  utils.placar(data)  # Imprime o placar ao final do jogo.
 
 if __name__ == '__main__':
   data = GameData()

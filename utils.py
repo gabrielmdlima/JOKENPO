@@ -1,6 +1,7 @@
 from os import system, name
 from time import sleep
 import ascii
+import json
 
 
 def clear_screen():
@@ -160,13 +161,19 @@ def continuar():
       print('\n\033[31mOpção inválida! Tente novamente!\033[m')
 
 #  Mostra o placar no console ao final do jogo
-def placar(player, computer, partidas):
+def placar(data):
   titulo()
-  print(f'\nO resultado final de {partidas} partidas foi:\n')
-  if player > computer:
-    print(f'Você {player} X {computer} Computador')
-  elif computer > player:
-    print(f'Computador {computer} X {player} Você')
+  print(f'\nO resultado final de {data.num_partidas} partidas foi:\n')
+  if data.score_player > data.score_computer:
+    print(f'Você {data.score_player} X {data.score_computer} Computador')
+  elif data.score_computer > data.score_player:
+    print(f'Computador {data.score_computer} X {data.score_player} Você')
   else:
-    print(f'EMPATE! {player} X {computer}')
+    print(f'EMPATE! {data.score_player} X {data.score_computer}')
   print()
+
+def set_translation():
+  with open('translations.json', 'r', encoding='utf-8') as file:
+    translations = json.load(file)
+  
+  return translations
