@@ -1,25 +1,25 @@
 {
   "pt": {
-    "get_choice": "Sua escolha: ",
+    "get_choice": "Sua escolha:",
     "invalid_input": "Opção '{entrance}' inválida. Tente novamente!",
     "you_win": " PARABÉNS! VOCÊ GANHOU! ",
     "you_loose": " QUE PENA! VOCÊ PERDEU! ",
     "draw": " TEMOS UM EMPATE! ",
     "play_again": "\nJogar novamente? (S/N) ",
-    "scoreboard": "\nO resultado final de {partidas} partidas foi:\n",
+    "scoreboard": "\nO resultado final de {partidas} partidas é:\n",
     "score_winner": "Você {player} X {computer} Computador",
     "score_looser": "Computador {computer} X {player} Você",
     "score_draw": "EMPATE! {player} X {computer}"
   },
   
   "en": {
-    "get_choice": "Your choice: ",
+    "get_choice": "Your choice:",
     "invalid_input": "Invalid option '{entrance}'. Try again!",
     "you_win": " CONGRATULATIONS! YOU WON! ",
     "you_loose": " TOO BAD! YOU LOST! ",
     "draw": " IT'S A DRAW! ",
     "play_again": "\nPlay again? (Y/N) ",
-    "scoreboard": "\nThe final result of {partidas} matches was:\n",
+    "scoreboard": "\nThe final result of {partidas} matches is:\n",
     "score_winner": "You {player} X {computer} Computer",
     "score_looser": "Computer {computer} X {player} You",
     "score_draw": "DRAW! {player} X {computer}"

@@ -16,7 +16,7 @@ class GameData:
       print("""
 Idioma / Language
 [1] Português
-[2] Inglês
+[2] English
 """)
       choice = int(input('Idioma / Language: '))
       if str(choice) in '12':
@@ -61,7 +61,7 @@ def run(data):
     utils.escolha_jogador(data)  # Recebendo a escolha do jogador.
     # print(data.player)  # log da resposta do jogador.
 
-    utils.jokenpo(data.entrance)  # Imprimindo a frase "Jokenpô" com intervalos para dar mais realismo ao jogo.
+    utils.jokenpo(data)  # Imprimindo a frase "Jokenpô" com intervalos para dar mais realismo ao jogo.
 
     utils.define_results(data)  # Compara as escolhas do jogador e do computador, indicando se houve empate ou quem ganhou.
 
@@ -69,7 +69,7 @@ def run(data):
 
     data.num_partidas += 1  # Contabiliza a quantidade de partidas.
 
-    print(utils.result(data.result))  # Apresenta o resultado no console.
+    print(utils.result(data))  # Apresenta o resultado no console.
 
     if not utils.continuar(data):  # Recebe a escolha do usuário de continuar ou não.
       break
