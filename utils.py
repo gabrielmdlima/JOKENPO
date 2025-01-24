@@ -38,7 +38,7 @@ def titulo():
   print('-=-'*10)
 
 
-def escolha_jogador():
+def escolha_jogador(data):
   while True:
     titulo()  # Título do jogo / Game title.
 
@@ -50,15 +50,21 @@ def escolha_jogador():
     # Transforma a escolha do jogador em um número inteiro para ser comparada com a escolha da máquina.
     # Turns the player's choice in an int number to compare with the computer's choice.
     if choice == 'PEDRA':
-      return 1, entrance
+      data.player = 1
+      data.entrance = entrance
+      break
     elif choice == 'PAPEL':
-      return 2, entrance
+      data.player = 2
+      data.entrance = entrance
+      break
     elif choice == 'TESOURA':
-      return 3, entrance
+      data.player = 3
+      data.entrance = entrance
+      break
     else:
       print(f'\033[31mOpção "{entrance}" inválida. Tente novamente!\033[m')
       sleep(2)
-
+  return
 
 def jokenpo(entrance):
 
@@ -107,35 +113,35 @@ def definir_resultado(player, computer):
   return saida
 
 
-def define_results(player, computer):
+def define_results(data):
   #  Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
-  if player == 1 and computer == 1:  # EMPATE PEDRA
+  if data.player == 1 and data.computer == 1:  # EMPATE PEDRA
     ascii.pedra_pedra()
-  elif player == 2 and computer == 2:  # EMPATE PAPEL
+  elif data.player == 2 and data.computer == 2:  # EMPATE PAPEL
     ascii.papel_papel()
-  elif player == 3 and computer == 3:  # EMPATE TESOURA
+  elif data.player == 3 and data.computer == 3:  # EMPATE TESOURA
     ascii.tesoura_tesoura()
-  elif player == 1 and computer == 3:  # JOGADOR GANHA COM PEDRA
+  elif data.player == 1 and data.computer == 3:  # JOGADOR GANHA COM PEDRA
     ascii.tesoura_pedra()
     saida = 1
-  elif player == 2 and computer == 1:  # JOGADOR GANHA COM PAPEL
+  elif data.player == 2 and data.computer == 1:  # JOGADOR GANHA COM PAPEL
     ascii.pedra_papel()
     saida = 1
-  elif player == 3 and computer == 2:  # JOGADOR GANHA COM TESOURA
+  elif data.player == 3 and data.computer == 2:  # JOGADOR GANHA COM TESOURA
     ascii.papel_tesoura()
     saida = 1
-  elif computer == 1 and player == 3:  # COMPUTADOR GANHA COM PEDRA
+  elif data.computer == 1 and data.player == 3:  # COMPUTADOR GANHA COM PEDRA
     ascii.pedra_tesoura()
     saida = 2
-  elif computer == 2 and player == 1:  # COMPUTADOR GANHA COM PAPEL
+  elif data.computer == 2 and data.player == 1:  # COMPUTADOR GANHA COM PAPEL
     ascii.papel_pedra()
     saida = 2
-  elif computer == 3 and player == 2:  # COMPUTADOR GANHA COM TESOURA
+  elif data.computer == 3 and data.player == 2:  # COMPUTADOR GANHA COM TESOURA
     ascii.tesoura_papel()
     saida = 2
 
-  return saida  # Devolve o resultado
+  data.result = saida
 
 
 def result(entrada):
@@ -149,7 +155,7 @@ def result(entrada):
   return f'\n{"\033[33m TEMOS UM EMPATE! \033[m":=^49}'
 
 #  Pergunta se o jogador quer continuar
-def continuar():
+def continuar(data):
   # print('\n'*10)
   while True:
     entrada = str(input('\nJogar novamente? (S/N) ')).strip().upper()
