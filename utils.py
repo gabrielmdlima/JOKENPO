@@ -67,9 +67,12 @@ def escolha_jogador(data):
       data.entrance = entrance
       break
     else:
-      message = data.translations[data.language]['invalid_input'].format(entrance=entrance)
-      print(f"\n\033[31m{message}\033[m")
-      sleep(2)
+      message = data.translations[data.language]['invalid_input'].format(entrance= f'\033[1m{entrance}\033[0;31m')
+      print(f"\n\033[31m{message}")
+      for i in range(3, 0, -1):
+        print(f'{i}..', end=' ', flush=True)
+        sleep(1)
+      print("\033[m")
   return
 
 
