@@ -203,7 +203,7 @@ def placar(data):
   print()
 
 def set_translation():
-  with open('translations.json', 'r', encoding='utf-8') as file:
+  with open('C:/Users/gabri/Documents/MeusProjetos/JOKENPO/translations.json', 'r', encoding='utf-8') as file:
     translations = json.load(file)
   
   return translations
