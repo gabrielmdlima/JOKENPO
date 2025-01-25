@@ -1,6 +1,7 @@
 from os import system, name
 from time import sleep
 import ascii
+import json
 
 
 def clear_screen():
@@ -37,34 +38,54 @@ def titulo():
   print('-=-'*10)
 
 
-def escolha_jogador():
+def escolha_jogador(data):
   while True:
-    titulo()  # Título do jogo / Game title.
-
+    # Título do jogo / Game title.
     # Dá as opções do jogador
     # Give player's options
-    ascii.opcoes_dir()
-    entrance = str(input('Sua escolha: ')).strip()  # Recebe a escolha do jogar / Receives player's choice.
+    if data.language == 'pt':
+      titulo()
+      ascii.opcoes_dir()
+    elif data.language == 'en':
+      title()
+      ascii.options()
+    input_message = data.translations[data.language]['get_choice']
+    entrance = str(input(f'{input_message} ')).strip()  # Recebe a escolha do jogar / Receives player's choice.
     choice = entrance.upper()
     # Transforma a escolha do jogador em um número inteiro para ser comparada com a escolha da máquina.
     # Turns the player's choice in an int number to compare with the computer's choice.
-    if choice == 'PEDRA':
-      return 1, entrance
-    elif choice == 'PAPEL':
-      return 2, entrance
-    elif choice == 'TESOURA':
-      return 3, entrance
+    if choice == 'PEDRA' or choice == 'ROCK':
+      data.player = 1
+      data.entrance = entrance
+      break
+    elif choice == 'PAPEL' or choice == 'PAPER':
+      data.player = 2
+      data.entrance = entrance
+      break
+    elif choice == 'TESOURA' or choice == 'SCISSOR':
+      data.player = 3
+      data.entrance = entrance
+      break
     else:
-      print(f'\033[31mOpção "{entrance}" inválida. Tente novamente!\033[m')
-      sleep(2)
+      message = data.translations[data.language]['invalid_input'].format(entrance= f'\033[1m{entrance}\033[0;31m')
+      print(f"\n\033[31m{message}")
+      for i in range(3, 0, -1):
+        print(f'{i}..', end=' ', flush=True)
+        sleep(1)
+      print("\033[m")
+  return
 
 
-def jokenpo(entrance):
+def jokenpo(data):
 
   for i in range(3):
-    titulo()
-    ascii.opcoes_dir()
-    print(f'Sua escolha: {entrance}')
+    if data.language == 'pt':
+      titulo()
+      ascii.opcoes_dir()
+    elif data.language == 'en':
+      title()
+      ascii.options()
+    print(f'{data.translations[data.language]["get_choice"]}', data.entrance)
     print()
     print('='*41)
     ascii.jokenpo(i)
@@ -106,67 +127,83 @@ def definir_resultado(player, computer):
   return saida
 
 
-def define_results(player, computer):
+def define_results(data):
   #  Empate = 0 / Player ganha = 1 / Computador ganha = 2
   saida = 0
-  if player == 1 and computer == 1:  # EMPATE PEDRA
+  if data.player == 1 and data.computer == 1:  # EMPATE PEDRA
     ascii.pedra_pedra()
-  elif player == 2 and computer == 2:  # EMPATE PAPEL
+  elif data.player == 2 and data.computer == 2:  # EMPATE PAPEL
     ascii.papel_papel()
-  elif player == 3 and computer == 3:  # EMPATE TESOURA
+  elif data.player == 3 and data.computer == 3:  # EMPATE TESOURA
     ascii.tesoura_tesoura()
-  elif player == 1 and computer == 3:  # JOGADOR GANHA COM PEDRA
+  elif data.player == 1 and data.computer == 3:  # JOGADOR GANHA COM PEDRA
     ascii.tesoura_pedra()
     saida = 1
-  elif player == 2 and computer == 1:  # JOGADOR GANHA COM PAPEL
+  elif data.player == 2 and data.computer == 1:  # JOGADOR GANHA COM PAPEL
     ascii.pedra_papel()
     saida = 1
-  elif player == 3 and computer == 2:  # JOGADOR GANHA COM TESOURA
+  elif data.player == 3 and data.computer == 2:  # JOGADOR GANHA COM TESOURA
     ascii.papel_tesoura()
     saida = 1
-  elif computer == 1 and player == 3:  # COMPUTADOR GANHA COM PEDRA
+  elif data.computer == 1 and data.player == 3:  # COMPUTADOR GANHA COM PEDRA
     ascii.pedra_tesoura()
     saida = 2
-  elif computer == 2 and player == 1:  # COMPUTADOR GANHA COM PAPEL
+  elif data.computer == 2 and data.player == 1:  # COMPUTADOR GANHA COM PAPEL
     ascii.papel_pedra()
     saida = 2
-  elif computer == 3 and player == 2:  # COMPUTADOR GANHA COM TESOURA
+  elif data.computer == 3 and data.player == 2:  # COMPUTADOR GANHA COM TESOURA
     ascii.tesoura_papel()
     saida = 2
 
-  return saida  # Devolve o resultado
+  data.result = saida
 
 
-def result(entrada):
+def result(data):
   print()  # Serve como \n para, se eu colocar junto na linha de baixo fica um espaço antes da impressão
   print('-'*41)
   sleep(0.6)
-  if entrada == 1:
-    return f'\n{"\033[32m PARABÉNS! VOCÊ GANHOU! \033[m":=^49}'
-  if entrada == 2:
-    return f'\n{"\033[31m QUE PENA! VOCÊ PERDEU! \033[m":=^49}'
-  return f'\n{"\033[33m TEMOS UM EMPATE! \033[m":=^49}'
+  if data.result == 1:
+    message = f"\033[32m{data.translations[data.language]['you_win']}\033[m"
+    return f'\n{message:=^49}'
+  if data.result == 2:
+    message = f"\033[31m{data.translations[data.language]['you_loose']}\033[m"
+    return f'\n{message:=^49}'
+  else:
+    message = f"\033[33m{data.translations[data.language]['draw']}\033[m"
+    return f'\n{message:=^49}'
 
 #  Pergunta se o jogador quer continuar
-def continuar():
+def continuar(data):
   # print('\n'*10)
   while True:
-    entrada = str(input('\nJogar novamente? (S/N) ')).strip().upper()
-    if entrada in 'NÃO':
+    entrada = str(input(data.translations[data.language]['play_again'])).strip().upper()[0]
+    if entrada in 'N':
       return False
-    elif entrada in 'SIM':
+    elif entrada in 'SY':
       return True
     else:
-      print('\n\033[31mOpção inválida! Tente novamente!\033[m')
+      message = data.translations[data.language]['invalid_input'].format(entrance=entrada)
+      print(f"\n\033[31m{message}\033[m")
 
 #  Mostra o placar no console ao final do jogo
-def placar(player, computer, partidas):
-  titulo()
-  print(f'\nO resultado final de {partidas} partidas foi:\n')
-  if player > computer:
-    print(f'Você {player} X {computer} Computador')
-  elif computer > player:
-    print(f'Computador {computer} X {player} Você')
+def placar(data):
+  titulo() if data.language == 'pt' else title()
+
+  matches = data.translations[data.language]['scoreboard'].format(partidas=data.num_partidas)
+  print(matches)
+  if data.score_player > data.score_computer:
+    scoreboard = data.translations[data.language]['score_winner'].format(player=data.score_player, computer=data.score_computer)
+    print(scoreboard)
+  elif data.score_computer > data.score_player:
+    scoreboard = data.translations[data.language]['score_looser'].format(computer=data.score_computer, player=data.score_player)
+    print(scoreboard)
   else:
-    print(f'EMPATE! {player} X {computer}')
+    scoreboard = data.translations[data.language]['score_draw'].format(player=data.score_player, computer=data.score_computer)
+    print(scoreboard)
   print()
+
+def set_translation():
+  with open('C:/Users/gabri/Documents/MeusProjetos/JOKENPO/translations.json', 'r', encoding='utf-8') as file:
+    translations = json.load(file)
+  
+  return translations
