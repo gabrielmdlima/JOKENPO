@@ -1,4 +1,4 @@
-from os import system, name
+from os import system, name, path
 from time import sleep
 import ascii
 import json
@@ -203,7 +203,10 @@ def placar(data):
   print()
 
 def set_translation():
-  with open('C:/Users/gabri/Documents/MeusProjetos/JOKENPO/translations.json', 'r', encoding='utf-8') as file:
+  base = path.dirname(__file__)
+  file = path.join(base, 'translations.json')
+
+  with open(file, 'r', encoding='utf-8') as file:
     translations = json.load(file)
   
   return translations
